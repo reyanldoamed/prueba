@@ -205,7 +205,7 @@ table, td, th {
 
       
 <?php
-$conexion=mysql_connect("localhost","root","")or die("error 1");
+$conexion=mysql_connect("localhost","root","reynaldo123")or die("error 1");
 mysql_select_db("evaluacion",$conexion) or die("error 2");
         $sql=  mysql_query("select * from preguntas where id_ma=4");
         while($res=  mysql_fetch_array($sql)){

@@ -44,6 +44,49 @@ function delete_id
      }
 }
 </script>
+<script type="text/javascript">
+
+  function carga(){
+    contador_s=60;
+    contador_m =29;
+    s =document.getElementById("segundos");
+    m =document.getElementById("minutos");
+
+    tiempo = setInterval(function(){
+      if(contador_s==0)
+      {
+        contador_s=60;
+        contador_m--;
+        m.innerHTML= contador_m + ":";
+        if(contador_m==-1)
+        {
+          s.innerHTML="00";
+          m.innerHTML="00";
+          alert("!!!!!!!!!!!!!Finalizo la prueba¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡");
+          location.href="http://localhost:8080/UATF%20SISTEMA%20ADMISION/index.php"
+          clearInterval(tiempo);
+        }else{
+          if(contador_m < 10)
+          {
+            contador_m = "0"+contador_m;
+          }
+        }
+      }
+      else{ 
+        if (contador_s < 10 ) 
+        {
+            contador_s = "0"+contador_s;
+            //s.innerHTML = contador_s;
+           // contador_s--;
+        }
+        s.innerHTML = contador_s;
+        contador_s--;
+      }
+      
+
+    },1000);
+  }
+</script>
 <title>Entry Exam System | Assessment</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="Styles/w3.css">
@@ -55,6 +98,11 @@ function delete_id
 <script src="bootstrap.min.js"></script>
 </head>
 <style>
+#tempo{
+  position: fixed;
+  
+ 
+}
 form {
 
 }
@@ -208,184 +256,149 @@ table {
       background-color: #F2F2F2;
 }
 </style>
-<body style="background-color:#FAFAD2;">
-<div style="background-color:#FFA07A; font-weight: bold; color:white;">
-<section>
-<p align="center" style="font-size:30px;">PREGUNTAS DE LA MATERIA DE HISTORIA
-<img style="float:right" src="Images/indice.png" width="110" class="img-circle"></p></p>
-</section>
-</div>
-<div class="container">
+<body style="background-color:#FAFAD2;" onload="carga();">
 
-
-
-<?php
-//error_reporting(E_ALL ^ E_DEPRECATED);
-   $conexion = new mysqli(SERVER,USER,PASS,BD);
-   $sql = "select * from preguntas  ORDER BY rand()";
-   $retval = $conexion->query($sql);
-   
-   
- while($row = $retval->fetch_array()) {
-  $q11 = $row['id_p'];
-   $q1 = $row['pregunta'];
-   $op11 = $row['op1'];
-   $op21 = $row['op2'];
-   $op31 = $row['op3'];
-    $op41 = $row['op4'];
- }
-  
-   $sql = "select * from preguntas where id_p!=$q11 ORDER BY rand()";
-   
-   $retval = $conexion->query($sql);
-   
-   
- while($row = $retval->fetch_array()){
-  $q12 = $row['id_p'];
-   $q2 = $row['pregunta'];
-   $op12 = $row['op1'];
-   $op22 = $row['op2'];
-   $op32 = $row['op3'];
-    $op42 = $row['op4'];
-   
-   
- } 
  
-  $sql = "select * from preguntas where id_p!=$q12 and id_p!=$q11  ORDER BY rand()";
-   
-   $retval = $conexion->query($sql);
-   
-   
- while($row = $retval->fetch_array()) {
-  $q13 = $row['id_p'];
-   $q3 = $row['pregunta'];
-   $op13 = $row['op1'];
-   $op23 = $row['op2'];
-   $op33 = $row['op3'];
-   $op43 = $row['op4'];
- }
-  
-   $sql = "select * from preguntas where id_p!=$q13 and id_p!=$q12 and id_p!=$q11  ORDER BY rand()";
-   
-   $retval = $conexion->query($sql);
-   
-   
- while($row = $retval->fetch_array()){
-  $q14 = $row['id_p'];
-   $q4 = $row['pregunta'];
-   $op14 = $row['op1'];
-   $op24 = $row['op2'];
-   $op34 = $row['op3'];
-    $op44 = $row['op4'];
- } 
-   $sql = "select * from  preguntas where id_p!=$q14 and id_p!=$q13  and id_p!=$q12 and id_p!=$q11 ORDER BY rand()";
-   
-   $retval = $conexion->query($sql);
-   
-   
- while($row = $retval->fetch_array()) {
-  $q15 = $row['id_p'];
-   $q5 = $row['pregunta'];
-   $op15 = $row['op1'];
-   $op25 = $row['op2'];
-   $op35 = $row['op3'];
-    $op45 = $row['op4'];
- }
-  
-   
-?>
-<form action="respuestas.php" method="POST">
-<table>
-<tr>
-<td>1. <?php echo "$q1"; ?></td>
-<input type="hidden"  id="q11" name="q11" value="<?php echo $q11;?>">
-</tr>
-
-
-
-<tr>
-
-
-
-</tr>
-<td><input type="radio" value="<?php echo "$op11"; ?>" name="q1" required="required"</td> <?php echo "$op11"; ?> </td>
-<tr>
-<td><input type="radio" value="<?php echo "$op21"; ?>" name="q1" required="required"</td> <?php echo "$op21"; ?> </td>
-<tr>
-<td><input type="radio" value="<?php echo "$op31"; ?>" name="q1" required="required"</td> <?php echo "$op31"; ?></td>
-<tr>
-<td><input type="radio" value="<?php echo "$op41"; ?>" name="q1" required="required"</td> <?php echo "$op41"; ?></td>
-</tr>
-
-
-<tr>
-<td>2. <?php echo "$q2"; ?></td>
-</tr>
-
-<input type="hidden"  id="q12" name="q12" value="<?php echo $q12;?>">
-
-<td><input type="radio" value="<?php echo "$op12"; ?>" name="q2" required="required"</td> <?php echo "$op12"; ?></td>
-<tr>
-<td><input type="radio" value="<?php echo "$op22"; ?>" name="q2" required="required"</td> <?php echo "$op22"; ?></td>
-<tr>
-<td><input type="radio" value="<?php echo "$op32"; ?>" name="q2" required="required"</td> <?php echo "$op32"; ?></td>
-<tr>
-<td><input type="radio" value="<?php echo "$op42"; ?>" name="q2" required="required"</td> <?php echo "$op42"; ?></td>
-</tr>
-
-
-<tr>
-<td>3. <?php echo "$q3"; ?></td>
-</tr>
-<input type="hidden"  id="q13" name="q13" value="<?php echo $q13;?>">
-
-<td><input type="radio" value="<?php echo "$op13"; ?>" name="q3" required="required"</td> <?php echo "$op13"; ?></td>
-<tr>
-<td><input type="radio" value="<?php echo "$op23"; ?>" name="q3" required="required"</td> <?php echo "$op23"; ?></td>
-<tr>
-<td><input type="radio" value="<?php echo "$op33"; ?>" name="q3" required="required"</td> <?php echo "$op33"; ?></td>
-<tr>
-<td><input type="radio" value="<?php echo "$op43"; ?>" name="q3" required="required"</td> <?php echo "$op43"; ?></td>
-</tr>
-
-
-<tr>
-<td>4. <?php echo "$q4"; ?></td>
-</tr>
-
-<input type="hidden"  id="q14" name="q14" value="<?php echo $q14;?>">
-
-<td><input type="radio" value="<?php echo "$op14"; ?>" name="q4" required="required"</td> <?php echo "$op14"; ?></td>
-<tr>
-<td><input type="radio" value="<?php echo "$op24"; ?>" name="q4" required="required"</td> <?php echo "$op24"; ?></td>
-<tr>
-<td><input type="radio" value="<?php echo "$op34"; ?>" name="q4" required="required"</td> <?php echo "$op34"; ?></td>
-<tr>
-<td><input type="radio" value="<?php echo "$op44"; ?>" name="q4" required="required"</td> <?php echo "$op44"; ?></td>
-</tr>
-
-<tr>
-<td>5. <?php echo "$q5"; ?></td>
-</tr>
-
-<input type="hidden"  id="q15" name="q15" value="<?php echo $q15;?>">
-
-<td><input type="radio" value="<?php echo "$op15"; ?>" name="q5" required="required"</td> <?php echo "$op15"; ?></td>
-<tr>
-<td><input type="radio" value="<?php echo "$op25"; ?>" name="q5" required="required"</td> <?php echo "$op25"; ?></td>
-<tr>
-<td><input type="radio" value="<?php echo "$op35"; ?>" name="q5" required="required"</td> <?php echo "$op35"; ?></td>
-<tr>
-<td><input type="radio" value="<?php echo "$op45"; ?>" name="q5" required="required"</td> <?php echo "$op45"; ?></td>
-</tr>
-
-
-
-<td>  <button type="submit" name = "submit" class="btn btn-warning" onclick="return confirm('ESTA SEGURO DE TERMINAR EL EXAMEN?');" >TERMINAR EXAMEN</button></td>
+  <div style="background-color:#FFA07A; font-weight: bold; color:white; position: relative;">
+      <section >
+          <p align="center" style="font-size:30px;">PREGUNTAS DE LA MATERIA DE HISTORIA
+         <span id="segundos" style="float: right; ">60</span><span id="minutos" style="float: right;">29:</span></p>
+      </section>
   </div>
+  <div class="container">
 
-  
-  
+        <?php
+              //error_reporting(E_ALL ^ E_DEPRECATED);
+              $conexion = new mysqli(SERVER,USER,PASS,BD);
+              $sql = "select * from preguntas  ORDER BY rand()";
+              $retval = $conexion->query($sql);
+              while($row = $retval->fetch_array()) {
+                  $q11 = $row['id_p'];
+                  $q1 = $row['pregunta'];
+                  $op11 = $row['op1'];
+                  $op21 = $row['op2'];
+                  $op31 = $row['op3'];
+                  $op41 = $row['op4'];
+              }
+          
+              $sql = "select * from preguntas where id_p!=$q11 ORDER BY rand()";
+              $retval = $conexion->query($sql);
+              while($row = $retval->fetch_array()){
+                  $q12 = $row['id_p'];
+                  $q2 = $row['pregunta'];
+                  $op12 = $row['op1'];
+                  $op22 = $row['op2'];
+                  $op32 = $row['op3'];
+                  $op42 = $row['op4'];  
+              } 
+         
+              $sql = "select * from preguntas where id_p!=$q12 and id_p!=$q11  ORDER BY rand()";
+              $retval = $conexion->query($sql);
+              while($row = $retval->fetch_array()) {
+                  $q13 = $row['id_p'];
+                  $q3 = $row['pregunta'];
+                  $op13 = $row['op1'];
+                  $op23 = $row['op2'];
+                  $op33 = $row['op3'];
+                  $op43 = $row['op4'];
+              }
+          
+              $sql = "select * from preguntas where id_p!=$q13 and id_p!=$q12 and id_p!=$q11  ORDER BY rand()";
+              $retval = $conexion->query($sql);
+              while($row = $retval->fetch_array()){
+                  $q14 = $row['id_p'];
+                  $q4 = $row['pregunta'];
+                  $op14 = $row['op1'];
+                  $op24 = $row['op2'];
+                  $op34 = $row['op3'];
+                  $op44 = $row['op4'];
+              } 
+
+              $sql = "select * from  preguntas where id_p!=$q14 and id_p!=$q13  and id_p!=$q12 and id_p!=$q11 ORDER BY rand()";
+              $retval = $conexion->query($sql); 
+              while($row = $retval->fetch_array()) {
+                  $q15 = $row['id_p'];
+                  $q5 = $row['pregunta'];
+                  $op15 = $row['op1'];
+                  $op25 = $row['op2'];
+                  $op35 = $row['op3'];
+                  $op45 = $row['op4'];
+              }
+          
+           
+        ?>
+
+        <form action="respuestas.php" method="POST">
+        <table>
+        <!--pregunta uno-->
+              <tr>
+                  <td>1. <?php echo "$q1"; ?></td>
+                  <input type="hidden"  id="q11" name="q11" value="<?php echo $q11;?>">
+              </tr>
+              <tr>
+              </tr>
+                  <td><input type="radio" value="<?php echo "$op11"; ?>" name="q1" required="required"</td> <?php echo "$op11"; ?> </td>
+              <tr>
+                  <td><input type="radio" value="<?php echo "$op21"; ?>" name="q1" required="required"</td> <?php echo "$op21"; ?> </td>
+              <tr>
+                  <td><input type="radio" value="<?php echo "$op31"; ?>" name="q1" required="required"</td> <?php echo "$op31"; ?></td>
+              <tr>
+                  <td><input type="radio" value="<?php echo "$op41"; ?>" name="q1" required="required"</td> <?php echo "$op41"; ?></td>
+              </tr>
+              <!--pregunta dos-->
+              <tr>
+                  <td>2. <?php echo "$q2"; ?></td>
+              </tr>
+              <input type="hidden"  id="q12" name="q12" value="<?php echo $q12;?>">
+              <td><input type="radio" value="<?php echo "$op12"; ?>" name="q2" required="required"</td> <?php echo "$op12"; ?></td>
+              <tr>
+                  <td><input type="radio" value="<?php echo "$op22"; ?>" name="q2" required="required"</td> <?php echo "$op22"; ?></td>
+              <tr>
+                  <td><input type="radio" value="<?php echo "$op32"; ?>" name="q2" required="required"</td> <?php echo "$op32"; ?></td>
+              <tr>
+                  <td><input type="radio" value="<?php echo "$op42"; ?>" name="q2" required="required"</td> <?php echo "$op42"; ?></td>
+              </tr>
+              <!--pregunta tres-->
+              <tr>
+                  <td>3. <?php echo "$q3"; ?></td>
+              </tr>
+              <input type="hidden"  id="q13" name="q13" value="<?php echo $q13;?>">
+              <td><input type="radio" value="<?php echo "$op13"; ?>" name="q3" required="required"</td> <?php echo "$op13"; ?></td>
+              <tr>
+                  <td><input type="radio" value="<?php echo "$op23"; ?>" name="q3" required="required"</td> <?php echo "$op23"; ?></td>
+              <tr>
+                  <td><input type="radio" value="<?php echo "$op33"; ?>" name="q3" required="required"</td> <?php echo "$op33"; ?></td>
+              <tr>
+                  <td><input type="radio" value="<?php echo "$op43"; ?>" name="q3" required="required"</td> <?php echo "$op43"; ?></td>
+              </tr>
+              <!--pregunta cuatro-->
+              <tr>
+                  <td>4. <?php echo "$q4"; ?></td>
+              </tr>
+              <input type="hidden"  id="q14" name="q14" value="<?php echo $q14;?>">
+              <td><input type="radio" value="<?php echo "$op14"; ?>" name="q4" required="required"</td> <?php echo "$op14"; ?></td>
+              <tr>
+                  <td><input type="radio" value="<?php echo "$op24"; ?>" name="q4" required="required"</td> <?php echo "$op24"; ?></td>
+              <tr>
+                  <td><input type="radio" value="<?php echo "$op34"; ?>" name="q4" required="required"</td> <?php echo "$op34"; ?></td>
+              <tr>
+                  <td><input type="radio" value="<?php echo "$op44"; ?>" name="q4" required="required"</td> <?php echo "$op44"; ?></td>
+              </tr>
+              <!--pregunta cinco-->
+              <tr>
+                <td>5. <?php echo "$q5"; ?></td>
+              </tr>
+              <input type="hidden"  id="q15" name="q15" value="<?php echo $q15;?>">
+                  <td><input type="radio" value="<?php echo "$op15"; ?>" name="q5" required="required"</td> <?php echo "$op15"; ?></td>
+              <tr>
+                  <td><input type="radio" value="<?php echo "$op25"; ?>" name="q5" required="required"</td> <?php echo "$op25"; ?></td>
+              <tr>
+                  <td><input type="radio" value="<?php echo "$op35"; ?>" name="q5" required="required"</td> <?php echo "$op35"; ?></td>
+              <tr>
+                  <td><input type="radio" value="<?php echo "$op45"; ?>" name="q5" required="required"</td> <?php echo "$op45"; ?></td>
+              </tr>
+              <td>  <button type="submit" name = "submit" class="btn btn-warning" onclick="return confirm('ESTA SEGURO DE TERMINAR EL EXAMEN?');" >TERMINAR EXAMEN</button></td>
+  </div>
 </html>
 
 <script>

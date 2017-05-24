@@ -1,6 +1,6 @@
 <?php
  		session_start();
-		$conexion = mysql_connect("localhost","root","");
+		$conexion = mysql_connect("localhost","root","reynaldo123");
 		mysql_select_db("evaluacion",$conexion);
 
 		
