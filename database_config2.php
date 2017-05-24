@@ -3,7 +3,7 @@
 define('SERVER', 'localhost');
 define('USER', 'root');
 define('PASS', 'reynaldo123');
-define('BD', 'evaluacion');
+define('BD', 'evaluacion3');
 
 
 
