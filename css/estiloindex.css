@@ -1,0 +1,34 @@
+body{
+    background-color: #E5E8E8  ;
+    font-family: Times New Roman;
+}
+.total{
+    border: 2px solid #212F3C;
+    width: 700px;
+    text-align: center;
+    margin: 0 auto;
+    box-shadow: 10px 10px 5px grey;
+    background-color: #FDFEFE;
+    
+}
+.form-horizontal{
+    border: 15px solid #FDFEFE    ;
+    border-radius: 35px;
+}
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: 1px solid #212F3C;
+}
+
+button {
+    width: 100%;
+}
+
+
+	

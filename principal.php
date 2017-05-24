@@ -171,7 +171,7 @@ li a:hover:not(.active) {
 <body style="background-color:#FAFAD2;">
 <div style="background-color:#00CED1; font-weight: bold; color:white;">
 <section>
-<p style="font-size:30px;">Sistema de Examen de Admision UATF
+<p style="font-size:30px;">Sistema de Examen de Admision UATF 
 <img style="float:right" src="Images/indice.png" width="90" class="img-circle"></p>
 <?php 
   include_once 'menu.php';
